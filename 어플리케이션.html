@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ko" class="light">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <title>학업 산책 • 통합 서비스</title>
+    
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@400;500;600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-fixed": "#003d50",
+              "on-primary-container": "#005169",
+              "surface-container-lowest": "#ffffff",
+              "secondary": "#3f6750",
+              "on-tertiary-fixed-variant": "#70532c",
+              "primary-container": "#cce8f4",
+              "on-surface-variant": "#40484c",
+              "surface-container-low": "#f6f4f4",
+              "on-secondary-container": "#002112",
+              "surface-container-high": "#ebe9e9",
+              "on-primary": "#ffffff",
+              "primary": "#006785",
+              "primary-dim": "#1a8fb1",
+              "on-surface": "#191c1d",
+              "surface-container": "#f0eeed",
+              "outline-variant": "#c0c8cc",
+              "tertiary": "#8d4f00",
+              "on-secondary": "#ffffff",
+              "secondary-container": "#c1edd0"
+            },
+            fontFamily: {
+                sans: ['"Plus Jakarta Sans"', '"Be Vietnam Pro"', 'sans-serif'],
+            }
+          }
+        }
+      };
+    </script>
+    <style>
+        body { -webkit-tap-highlight-color: transparent; }
+        .page-content { display: none; height: 100%; overflow-y: auto; padding-bottom: 120px; }
+        .page-content.active { display: block; animation: fadeIn 0.3s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .nav-item.active-nav { color: #006785; font-weight: bold; }
+        .nav-item.active-nav .material-symbols-outlined { font-variation-settings: 'FILL' 1; }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen font-sans">
+
+    <!-- 모바일 프레임 -->
+    <div class="relative w-full max-w-[430px] h-[932px] bg-white overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)] rounded-[3rem] border-[8px] border-gray-900">
+        
+        <!-- 상단 상태바 (Fixed) -->
+        <div class="h-12 flex items-center justify-between px-8 bg-white/80 backdrop-blur-md z-50 relative">
+            <span class="text-sm font-bold">9:41</span>
+            <div class="flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-sm">signal_cellular_4_bar</span>
+                <span class="material-symbols-outlined text-sm">wifi</span>
+                <span class="material-symbols-outlined text-sm">battery_full</span>
+            </div>
+        </div>
+
+        <!-- 1. 홈 페이지 (5.1.html) -->
+        <div id="page-home" class="page-content active">
+            <header class="px-6 pt-4 pb-6 flex items-center justify-between">
+                <div>
+                    <h1 class="text-2xl font-extrabold tracking-tight text-on-surface">학업 산책</h1>
+                    <p class="text-sm text-on-surface-variant font-medium">오늘도 즐거운 공부 되세요!</p>
+                </div>
+                <div class="w-12 h-12 rounded-2xl bg-primary-container flex items-center justify-center text-on-primary-container shadow-sm">
+                    <span class="material-symbols-outlined text-2xl">notifications</span>
+                </div>
+            </header>
+            <div class="px-6 mb-8">
+                <div class="relative"><span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant/70">search</span>
+                <input type="text" placeholder="강의, 할 일 검색..." class="w-full bg-surface-container-low border-none rounded-2xl py-4 pl-12 pr-4 text-sm font-medium"/></div>
+            </div>
+            <div class="px-6 mb-8">
+                <div class="bg-gradient-to-br from-primary to-primary-dim rounded-[2.5rem] p-7 text-white shadow-xl">
+                    <p class="text-primary-container text-sm font-bold mb-1 opacity-90 uppercase tracking-widest">오늘의 요약</p>
+                    <h2 class="text-3xl font-extrabold mb-4">65% 완료</h2>
+                    <div class="w-full bg-white/20 h-3 rounded-full mb-4 overflow-hidden"><div class="bg-white h-full" style="width: 65%"></div></div>
+                    <p class="text-sm font-medium text-primary-container">3개의 남은 할 일이 있습니다.</p>
+                </div>
+            </div>
+            <div class="px-6 grid grid-cols-2 gap-4">
+                <div class="bg-secondary-container/50 p-6 rounded-[2rem] border border-secondary-container">
+                    <span class="material-symbols-outlined text-secondary text-3xl mb-4">school</span>
+                    <h3 class="font-bold text-on-secondary-container">강의실</h3>
+                </div>
+                <div class="bg-[#ffe8ca] p-6 rounded-[2rem] border border-[#f5d4a1]">
+                    <span class="material-symbols-outlined text-tertiary text-3xl mb-4">menu_book</span>
+                    <h3 class="font-bold text-on-tertiary-fixed-variant">노트 정리</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. 할 일 페이지 (todolist.html) -->
+        <div id="page-todo" class="page-content">
+            <header class="px-6 pt-4 pb-6 flex items-center justify-between">
+                <div><h1 class="text-2xl font-extrabold text-on-surface">나의 할 일</h1><p class="text-sm text-on-surface-variant font-medium">체계적인 목표 달성</p></div>
+                <div class="w-12 h-12 rounded-2xl bg-surface-container flex items-center justify-center"><span class="material-symbols-outlined">more_vert</span></div>
+            </header>
+            <div class="px-6 mb-8 flex gap-4">
+                <div class="flex-1 bg-surface-container-low rounded-3xl p-4 border border-white text-center"><p class="text-xs font-bold opacity-60">전체</p><h3 class="text-xl font-bold">12</h3></div>
+                <div class="flex-1 bg-primary-container/30 rounded-3xl p-4 border border-primary-container/50 text-center"><p class="text-xs font-bold text-primary">진행</p><h3 class="text-xl font-bold text-primary">5</h3></div>
+                <div class="flex-1 bg-secondary-container/30 rounded-3xl p-4 border border-secondary-container/50 text-center"><p class="text-xs font-bold text-secondary">완료</p><h3 class="text-xl font-bold text-secondary">7</h3></div>
+            </div>
+            <div class="px-6 space-y-4">
+                <div class="bg-white p-5 rounded-[2rem] border border-surface-container shadow-sm flex items-center gap-4">
+                    <div class="w-6 h-6 border-2 border-primary rounded-lg"></div>
+                    <div><h4 class="font-bold">알고리즘 과제 제출</h4><p class="text-xs text-on-surface-variant">오후 2:00까지</p></div>
+                </div>
+                <div class="bg-white p-5 rounded-[2rem] border border-surface-container shadow-sm flex items-center gap-4">
+                    <div class="w-6 h-6 border-2 border-primary rounded-lg"></div>
+                    <div><h4 class="font-bold">영어 단어 50개 암기</h4><p class="text-xs text-on-surface-variant">오후 6:00까지</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. 캘린더 페이지 (3.html) -->
+        <div id="page-calendar" class="page-content">
+            <header class="px-6 pt-4 pb-6 flex items-center justify-between">
+                <button class="w-12 h-12 rounded-2xl bg-surface-container-low flex items-center justify-center"><span class="material-symbols-outlined">chevron_left</span></button>
+                <h2 class="text-xl font-extrabold">2024년 5월</h2>
+                <button class="w-12 h-12 rounded-2xl bg-surface-container-low flex items-center justify-center"><span class="material-symbols-outlined">chevron_right</span></button>
+            </header>
+            <div class="px-6 mb-6">
+                <div class="grid grid-cols-7 text-center mb-4 text-xs font-bold text-on-surface-variant opacity-50 uppercase">
+                    <div>일</div><div>월</div><div>화</div><div>수</div><div>목</div><div>금</div><div>토</div>
+                </div>
+                <div class="grid grid-cols-7 gap-1">
+                    <!-- 달력 그리드 단순화 -->
+                    <div class="h-14 flex items-center justify-center text-sm font-medium opacity-30">28</div>
+                    <div class="h-14 flex items-center justify-center text-sm font-medium opacity-30">29</div>
+                    <div class="h-14 flex items-center justify-center text-sm font-medium opacity-30">30</div>
+                    <div class="h-14 flex items-center justify-center text-sm font-bold bg-primary text-white rounded-2xl shadow-lg shadow-primary/30">1</div>
+                    <div class="h-14 flex items-center justify-center text-sm font-medium">2</div>
+                    <div class="h-14 flex items-center justify-center text-sm font-medium">3</div>
+                    <div class="h-14 flex items-center justify-center text-sm font-medium text-blue-500">4</div>
+                    <!-- 생략된 나머지 일자들은 생략하거나 반복 가능 -->
+                </div>
+            </div>
+            <div class="px-6">
+                <h3 class="font-bold mb-4">오늘의 일정</h3>
+                <div class="bg-surface-container-low p-5 rounded-[2rem] border-l-4 border-primary">
+                    <p class="text-xs font-bold text-primary mb-1">10:00 - 12:00</p>
+                    <h4 class="font-bold">데이터베이스 강의</h4>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. 프로필/마이 페이지 (4.html) -->
+        <div id="page-profile" class="page-content">
+            <div class="px-6 pt-10 text-center">
+                <div class="relative inline-block mb-6">
+                    <div class="w-32 h-32 rounded-[3rem] bg-gradient-to-tr from-primary to-primary-dim p-1">
+                        <div class="w-full h-full bg-white rounded-[2.8rem] flex items-center justify-center overflow-hidden">
+                            <span class="material-symbols-outlined text-6xl text-primary">person</span>
+                        </div>
+                    </div>
+                    <div class="absolute -bottom-1 -right-1 w-10 h-10 bg-secondary rounded-2xl border-4 border-white flex items-center justify-center">
+                        <span class="material-symbols-outlined text-white text-xl">edit</span>
+                    </div>
+                </div>
+                <h2 class="text-2xl font-extrabold">김산책 님</h2>
+                <p class="text-sm text-on-surface-variant font-medium mt-1">컴퓨터공학과 | 3학년</p>
+            </div>
+            <div class="mt-10 px-6 space-y-3">
+                <div class="bg-surface-container-low p-5 rounded-[2rem] flex items-center justify-between">
+                    <div class="flex items-center gap-4"><span class="material-symbols-outlined text-primary">settings</span><span class="font-bold">계정 설정</span></div>
+                    <span class="material-symbols-outlined">chevron_right</span>
+                </div>
+                <div class="bg-surface-container-low p-5 rounded-[2rem] flex items-center justify-between">
+                    <div class="flex items-center gap-4"><span class="material-symbols-outlined text-primary">analytics</span><span class="font-bold">학업 통계</span></div>
+                    <span class="material-symbols-outlined">chevron_right</span>
+                </div>
+                <div class="bg-red-50 p-5 rounded-[2rem] flex items-center justify-between">
+                    <div class="flex items-center gap-4"><span class="material-symbols-outlined text-red-500">logout</span><span class="font-bold text-red-500">로그아웃</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 하단 공통 네비게이션 (Fixed) -->
+        <nav class="absolute bottom-0 left-0 right-0 h-24 bg-white/95 backdrop-blur-xl border-t border-surface-container-high px-4 pb-2 z-50">
+            <div class="flex items-center justify-around h-full">
+                <button onclick="navigate('home')" id="nav-home" class="nav-item active-nav flex flex-col items-center justify-center py-2 px-4 rounded-2xl transition-all">
+                    <span class="material-symbols-outlined text-2xl">home</span>
+                    <span class="text-[10px] font-medium mt-0.5">홈</span>
+                </button>
+                <button onclick="navigate('todo')" id="nav-todo" class="nav-item text-[#5b5f68] flex flex-col items-center justify-center py-2 px-4 rounded-2xl transition-all">
+                    <span class="material-symbols-outlined text-2xl">check_circle</span>
+                    <span class="text-[10px] font-medium mt-0.5">할 일</span>
+                </button>
+                <button onclick="navigate('calendar')" id="nav-calendar" class="nav-item text-[#5b5f68] flex flex-col items-center justify-center py-2 px-4 rounded-2xl transition-all">
+                    <span class="material-symbols-outlined text-2xl">calendar_month</span>
+                    <span class="text-[10px] font-medium mt-0.5">캘린더</span>
+                </button>
+                <button onclick="navigate('profile')" id="nav-profile" class="nav-item text-[#5b5f68] flex flex-col items-center justify-center py-2 px-4 rounded-2xl transition-all">
+                    <span class="material-symbols-outlined text-2xl">person</span>
+                    <span class="text-[10px] font-medium mt-0.5">마이</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- 공통 FAB (액션 버튼) -->
+        <button id="main-fab" class="absolute bottom-28 right-5 w-16 h-16 bg-gradient-to-br from-primary to-primary-dim text-white rounded-3xl shadow-2xl flex items-center justify-center active:scale-90 transition-all z-40">
+            <span class="material-symbols-outlined text-3xl font-bold">add</span>
+        </button>
+
+    </div>
+
+    <script>
+        /**
+         * 페이지 전환 엔진
+         * @param {string} pageId - 이동할 페이지 식별자
+         */
+        function navigate(pageId) {
+            // 1. 모든 페이지 숨기기
+            const pages = document.querySelectorAll('.page-content');
+            pages.forEach(p => p.classList.remove('active'));
+
+            // 2. 모든 네비게이션 아이템 활성화 해제
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(n => {
+                n.classList.remove('active-nav');
+                n.classList.add('text-[#5b5f68]');
+            });
+
+            // 3. 대상 페이지 표시
+            const targetPage = document.getElementById('page-' + pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+                // 스크롤 맨 위로 이동
+                targetPage.scrollTop = 0;
+            }
+
+            // 4. 대상 네비게이션 아이콘 강조
+            const targetNav = document.getElementById('nav-' + pageId);
+            if (targetNav) {
+                targetNav.classList.add('active-nav');
+                targetNav.classList.remove('text-[#5b5f68]');
+            }
+
+            // 5. 페이지별 FAB 아이콘 변경 (선택 사항)
+            const fab = document.getElementById('main-fab');
+            if (pageId === 'calendar') {
+                fab.innerHTML = '<span class="material-symbols-outlined text-3xl font-bold">event_note</span>';
+            } else if (pageId === 'profile') {
+                fab.style.display = 'none';
+            } else {
+                fab.style.display = 'flex';
+                fab.innerHTML = '<span class="material-symbols-outlined text-3xl font-bold">add</span>';
+            }
+        }
+    </script>
+
+</body>
+</html>
